@@ -9,8 +9,12 @@ class Envelope extends Phaser.Scene {
         this.load.image('arrow_right', './assets/arrow_right.PNG')
         this.load.image('gold', './assets/gold.PNG')
         this.load.image('pan', './assets/pan.PNG')
-        this.load.image('river', './assets/river.JPG')
-        this.load.image('sell', './assets/sell.JPG')
+        this.load.image('river0', './assets/river_chunk_0.jpg')
+        this.load.image('river1', './assets/river_chunk_1.jpg')
+        this.load.image('river2', './assets/river_chunk_2.jpg')
+        this.load.image('river3', './assets/river_chunk_3.jpg')
+        this.load.image('river4', './assets/river_chunk_4.jpg')
+        this.load.image('sell', './assets/sell.PNG')
     }
 
     create() {

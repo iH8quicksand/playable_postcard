@@ -15,7 +15,11 @@ class Game extends Phaser.Scene {
     create() {
         this.cameras.main.setBounds(0, 0, game.config.width * 5, game.config.height);
         
-        this.add.image(0, 0, 'river').setOrigin(0.5, 0.5);
+        this.add.image(0*game.config.width, 0, 'river0').setOrigin(0.0, 0.0);
+        this.add.image(1*game.config.width, 0, 'river1').setOrigin(0.0, 0.0);
+        this.add.image(2*game.config.width, 0, 'river2').setOrigin(0.0, 0.0);
+        this.add.image(3*game.config.width, 0, 'river3').setOrigin(0.0, 0.0);
+        this.add.image(4*game.config.width, 0, 'river4').setOrigin(0.0, 0.0);
 
         this.cameras.main.scrollX = this.riverPosition * game.config.width;
 
@@ -139,7 +143,7 @@ class Game extends Phaser.Scene {
 
                 this.time.delayedCall(1500, () => {
                     this.panContainer.setVisible(false);
-                    sparkle.destroy(); // Remove sparkle permanently
+                    sparkle.destroy(); 
                     this.isPanning = false;
                 });
             }
