@@ -1,3 +1,5 @@
+// Shiloh Sharmahd
+// More Shiny Thoughts
 let config = {
     type: Phaser.AUTO,
     width: 2208,
@@ -15,4 +17,4 @@ let config = {
     scene: [ Envelope, Game, Letter ]
 }
 
-let game = new Phaser.Game(config);
+let game = new Phaser.Game(config)

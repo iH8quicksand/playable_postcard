@@ -1,6 +1,6 @@
 class Envelope extends Phaser.Scene {
     constructor() {
-        super("envelopeScene");
+        super("envelopeScene")
     }
 
     preload() {
@@ -15,13 +15,19 @@ class Envelope extends Phaser.Scene {
         this.load.image('river3', './assets/river_chunk_3.jpg')
         this.load.image('river4', './assets/river_chunk_4.jpg')
         this.load.image('sell', './assets/sell.PNG')
+        this.load.bitmapFont('DZW', './assets/font/DZW.png', './assets/font/DZW.xml')
+        this.load.audio('fools_gold', './assets/sound/fools_gold.mp3')
+        this.load.audio('fools_gold1', './assets/sound/fools_gold1.mp3')
+        this.load.audio('river_ambient', './assets/sound/river_ambient.mp3')
+        this.load.audio('struck_gold', './assets/sound/struck_gold.mp3')
+        this.load.audio('struck_gold_mega', './assets/sound/struck_gold_mega.mp3')
     }
 
     create() {
         this.add.sprite(2208, 1400, 'envelope').setOrigin(1, 1)
 
         this.input.on('pointerdown', () => {
-            this.scene.start('gameScene');
-        });
+            this.scene.start('gameScene')
+        })
     }
 }
