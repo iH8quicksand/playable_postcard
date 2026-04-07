@@ -21,13 +21,16 @@ class Envelope extends Phaser.Scene {
         this.load.audio('river_ambient', './assets/sound/river_ambient.mp3')
         this.load.audio('struck_gold', './assets/sound/struck_gold.mp3')
         this.load.audio('struck_gold_mega', './assets/sound/struck_gold_mega.mp3')
+        this.load.video('myAnim', './assets/output.webm', true)
     }
 
     create() {
         this.add.sprite(2208, 1400, 'envelope').setOrigin(1, 1)
 
+
         this.input.on('pointerdown', () => {
             this.scene.start('gameScene')
         })
+
     }
 }

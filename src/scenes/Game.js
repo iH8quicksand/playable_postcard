@@ -21,6 +21,13 @@ class Game extends Phaser.Scene {
         this.add.image(3*game.config.width, 0, 'river3').setOrigin(0.0, 0.0)
         this.add.image(4*game.config.width, 0, 'river4').setOrigin(0.0, 0.0)
 
+        // In create() - hidden by default, centered on screen
+        this.vid = this.add.video(0, 0, 'myAnim')
+        .setOrigin(0)
+        .setDepth(5)
+        .setScrollFactor(0)
+        .setVisible(false);
+
         this.cameras.main.scrollX = this.riverPosition * game.config.width
 
         const uiConfig = { fontFamily: 'Arial', fontSize: '64px', color: '#FFFFFF' }
@@ -119,8 +126,6 @@ class Game extends Phaser.Scene {
 
         sparkle.setVisible(false)
 
-        this.panContainer.y = game.config.height - 300
-        this.panContainer.setVisible(true)
         this.panText.setText('hmmm...')
         this.panText.setColor('#FFFFFF')
 
@@ -142,34 +147,27 @@ class Game extends Phaser.Scene {
             }
         }
 
-
-        // START THE PANNING ANIMATION
-        this.tweens.add({
-            targets: this.panContainer,
-            y: game.config.height - 400, 
-            yoyo: true,
-            repeat: 3, 
-            duration: 150,
-            onComplete: () => {
+        this.vid.setVisible(true);
+        this.vid.play();
                 
-                if (isFoolsGold) {
-                    this.panText.setText('bruh, just\nfools gold\n(0 oz)')
-                    this.panText.setColor('#AAAAAA')
-                } else {
-                    let voiceline = foundOz >= 4 ? "Oh, My, GOD!" : "oooooh shiny"
-                    this.panText.setText(`${voiceline}\n+${foundOz} oz`)
-                    this.panText.setColor('#FFD700')
-                    
-                    this.totalGold += foundOz
-                    this.goldText.setText(`GOLD: ${this.totalGold} OZ`)
-                }
+        if (isFoolsGold) {
+            this.panText.setText('bruh, just\nfools gold\n(0 oz)')
+            this.panText.setColor('#AAAAAA')
+        } else {
+            let voiceline = foundOz >= 4 ? "Oh, My, GOD!" : "oooooh shiny"
+            this.panText.setText(`${voiceline}\n+${foundOz} oz`)
+            this.panText.setColor('#FFD700')
+            
+            this.totalGold += foundOz
+            this.goldText.setText(`GOLD: ${this.totalGold} OZ`)
+        }
 
-                this.time.delayedCall(1500, () => {
-                    this.panContainer.setVisible(false)
-                    sparkle.destroy()
-                    this.isPanning = false
-                })
-            }
+        this.time.delayedCall(1500, () => {
+            this.panContainer.setVisible(false)
+            this.vid.stop()
+            this.vid.setVisible(false)
+            sparkle.destroy()
+            this.isPanning = false
         })
     }
 }
