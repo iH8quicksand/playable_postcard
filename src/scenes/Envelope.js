@@ -4,7 +4,7 @@ class Envelope extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('envelope', './assets/envelope.PNG')
+        this.load.image('envelope', './assets/envelope.JPEG')
         this.load.image('arrow_left', './assets/arrow_left.PNG')
         this.load.image('arrow_right', './assets/arrow_right.PNG')
         this.load.image('gold', './assets/gold.PNG')
