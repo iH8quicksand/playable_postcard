@@ -21,12 +21,16 @@ class Game extends Phaser.Scene {
         this.add.image(3*game.config.width, 0, 'river3').setOrigin(0.0, 0.0)
         this.add.image(4*game.config.width, 0, 'river4').setOrigin(0.0, 0.0)
 
-        // In create() - hidden by default, centered on screen
-        this.vid = this.add.video(0, 0, 'myAnim')
+        this.vid = this.add.video(0, 530, 'myAnim')
         .setOrigin(0)
         .setDepth(5)
         .setScrollFactor(0)
         .setVisible(false);
+
+        // prime the video so it works later
+        this.vid.play();
+        this.vid.stop();
+        this.vid.seekTo(0);
 
         this.cameras.main.scrollX = this.riverPosition * game.config.width
 
@@ -147,8 +151,12 @@ class Game extends Phaser.Scene {
             }
         }
 
-        this.vid.setVisible(true);
-        this.vid.play();
+        this.vid.setVisible(false);
+        this.vid.seekTo(0);
+        this.vid.video.addEventListener('seeked', () => {
+            this.vid.setVisible(true);
+            this.vid.play();
+        }, { once: true });
                 
         if (isFoolsGold) {
             this.panText.setText('bruh, just\nfools gold\n(0 oz)')
@@ -162,7 +170,7 @@ class Game extends Phaser.Scene {
             this.goldText.setText(`GOLD: ${this.totalGold} OZ`)
         }
 
-        this.time.delayedCall(1500, () => {
+        this.time.delayedCall(3250, () => {
             this.panContainer.setVisible(false)
             this.vid.stop()
             this.vid.setVisible(false)
