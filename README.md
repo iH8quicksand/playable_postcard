@@ -23,3 +23,5 @@ Made for my Phaser3 game development class at UCSC. All assets are hand-painted 
 ---
 
 *Repository named `playable_postcard` after the class project — the game itself is called More Shiny Thoughts.*
+
+*Doesn't work on mobile yet*
