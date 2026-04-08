@@ -38,6 +38,14 @@ class Game extends Phaser.Scene {
         
         //this.goldText = this.add.text(50, 50, 'Gold: 0 oz', uiConfig).setScrollFactor(0) 
         this.goldText = this.add.bitmapText(50, 20, 'DZW', 'GOLD: 0 OZ', 90).setOrigin(0.).setScrollFactor(0)
+        
+        this.bonusText = this.add.bitmapText(game.config.width/2 - 200, game.config.height/2, 'DZW', '', 70)
+        .setOrigin(0)
+        .setScrollFactor(0)
+        .setDepth(20)
+        .setAlpha(0)
+        .setTint(0x00ff00)
+
 
         this.sellButton = this.add.image(game.config.width - 250, 100, 'sell')
         .setInteractive({ useHandCursor: true })
@@ -45,6 +53,8 @@ class Game extends Phaser.Scene {
         .on('pointerdown', () => {
             if (!this.isPanning && !this.isSliding) {
                 this.bgMusic.stop() 
+                this.sellSound = this.sound.add('chaching')
+                this.sellSound.play()
                 this.scene.start('letterScene', { gold: this.totalGold })
             }
         })
@@ -69,14 +79,7 @@ class Game extends Phaser.Scene {
         this.rightArrow.setVisible(this.riverPosition < 4)
 
 
-        this.panContainer = this.add.container(game.config.width / 2, game.config.height - 400).setVisible(false).setDepth(10).setScrollFactor(0)
-        
-        let panImg = this.add.image(0, 0, 'pan')
-        
-        this.panText = this.add.text(0, 50, '', { fontFamily: 'Arial', fontSize: '80px', color: '#FFD700', align: 'center', stroke: '#000000', strokeThickness: 6 }).setOrigin(0.5)
-        
-        this.panContainer.add([panImg, this.panText])
-
+        // play music :)
         this.bgMusic = this.sound.add('river_ambient', { loop: true, volume: 0.5 })
         this.bgMusic.play()
     }
@@ -130,24 +133,40 @@ class Game extends Phaser.Scene {
 
         sparkle.setVisible(false)
 
-        this.panText.setText('hmmm...')
-        this.panText.setColor('#FFFFFF')
 
         // DETERMINE OUTCOME AND PLAY SOUND WITH DELAYS
-        let isFoolsGold = Math.random() > 0.4
-        let foundOz = isFoolsGold ? 0 : Phaser.Math.Between(1, 5)
+        let isFoolsGold = Math.random() > 0.6
+        let foundOz = isFoolsGold ? 0 : Phaser.Math.Between(2, 5)
 
         if (isFoolsGold) {
-            if (Math.random() > 0.5) {
-                this.sound.play('fools_gold', { delay: 0.5 }); 
+            if (Math.random() > 0.3) {
+                this.sound.play('fools_gold0', {delay: 1.5}); 
+                console.log('fools_gold0')
+            } else if (Math.random() > 0.3) {
+                this.sound.play('fools_gold1', {delay: 1.5});
+                console.log('fools_gold1')
             } else {
-                this.sound.play('fools_gold1', { delay: 0.5 });
+                this.sound.play('fools_gold2', {delay: 1.0})
+                console.log('fools_gold2')
             }
         } else {
-            if (foundOz >= 4) {
-                this.sound.play('struck_gold_mega', { delay: 0.25 }); 
-            } else {
-                this.sound.play('struck_gold'); 
+            switch (foundOz) {
+                case 2:
+                    this.sound.play('struck_gold0', {delay: 0.0})
+                    console.log('struck_gold0')
+                    break
+                case 3:
+                    this.sound.play('struck_gold1', {delay: 1.5})
+                    console.log('struck_gold1')
+                    break
+                case 4:
+                    this.sound.play('struck_gold2', {delay: 2.0})
+                    console.log('struck_gold2')
+                    break
+                case 5:
+                    this.sound.play('struck_gold3', {delay: 2.0})
+                    console.log('struck_gold3')
+                    break
             }
         }
 
@@ -158,24 +177,24 @@ class Game extends Phaser.Scene {
             this.vid.play();
         }, { once: true });
                 
-        if (isFoolsGold) {
-            this.panText.setText('bruh, just\nfools gold\n(0 oz)')
-            this.panText.setColor('#AAAAAA')
-        } else {
-            let voiceline = foundOz >= 4 ? "Oh, My, GOD!" : "oooooh shiny"
-            this.panText.setText(`${voiceline}\n+${foundOz} oz`)
-            this.panText.setColor('#FFD700')
-            
-            this.totalGold += foundOz
-            this.goldText.setText(`GOLD: ${this.totalGold} OZ`)
-        }
 
         this.time.delayedCall(3250, () => {
-            this.panContainer.setVisible(false)
             this.vid.stop()
             this.vid.setVisible(false)
             sparkle.destroy()
             this.isPanning = false
+            if (!isFoolsGold) {
+                this.totalGold += foundOz
+                this.goldText.setText(`GOLD: ${this.totalGold} OZ`)
+                this.bonusText.setText(`${foundOz} OZ FOUND`).setAlpha(1);
+                this.tweens.add({
+                    targets: this.bonusText,
+                    alpha: 0,
+                    delay: 1000,
+                    duration: 800,
+                    ease: 'Sine.easeIn'
+                })
+            }
         })
     }
 }

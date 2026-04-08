@@ -16,11 +16,15 @@ class Envelope extends Phaser.Scene {
         this.load.image('river4', './assets/river_4.jpg')
         this.load.image('sell', './assets/sell.PNG')
         this.load.bitmapFont('DZW', './assets/font/DZW.png', './assets/font/DZW.xml')
-        this.load.audio('fools_gold', './assets/sound/fools_gold.mp3')
+        this.load.audio('fools_gold0', './assets/sound/fools_gold0.mp3')
         this.load.audio('fools_gold1', './assets/sound/fools_gold1.mp3')
+        this.load.audio('fools_gold2', './assets/sound/fools_gold2.mp3')
         this.load.audio('river_ambient', './assets/sound/river_ambient.mp3')
-        this.load.audio('struck_gold', './assets/sound/struck_gold.mp3')
-        this.load.audio('struck_gold_mega', './assets/sound/struck_gold_mega.mp3')
+        this.load.audio('struck_gold0', './assets/sound/struck_gold0.mp3')
+        this.load.audio('struck_gold1', './assets/sound/struck_gold1.mp3')
+        this.load.audio('struck_gold2', './assets/sound/struck_gold2.mp3')
+        this.load.audio('struck_gold3', './assets/sound/struck_gold3.mp3')
+        this.load.audio('chaching', './assets/sound/chaching.mp3')
         this.load.video('myAnim', './assets/output.webm', true)
     }
 
