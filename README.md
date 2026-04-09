@@ -6,8 +6,6 @@ A playable postcard for my dad — pan for gold, and when you're ready to sell, 
 
 ![Game Screenshot](screenshots/screenshot.png)
 
----
-
 ## About
 
 My dad recently bought a gold detector so he and I are planning to go gold prospecting together this summer, so I made him a postcard with a little gold panning minigame inside it. The name is a play on his email address. When you decide to sell your gold, the postcard flips — that's when the real message is waiting for him.
