@@ -36,7 +36,6 @@ class Game extends Phaser.Scene {
 
         const uiConfig = { fontFamily: 'Arial', fontSize: '64px', color: '#FFFFFF' }
         
-        //this.goldText = this.add.text(50, 50, 'Gold: 0 oz', uiConfig).setScrollFactor(0) 
         this.goldText = this.add.bitmapText(50, 20, 'DZW', 'GOLD: 0 OZ', 90).setOrigin(0.).setScrollFactor(0)
         
         this.bonusText = this.add.bitmapText(game.config.width/2 - 200, game.config.height/2, 'DZW', '', 70)
