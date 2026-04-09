@@ -4,7 +4,7 @@ A playable postcard for my dad — pan for gold, and when you're ready to sell, 
 
 **[Play it here](https://ih8quicksand.github.io/playable_postcard/)**
 
-*(screenshot here)*
+![Game Screenshot](screenshots/screenshot.png)
 
 ---
 
